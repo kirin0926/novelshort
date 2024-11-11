@@ -1,6 +1,4 @@
 import { Link } from "@nextui-org/link";
-import Logo from '@/components/icons/Logo';
-import GitHub from '@/components/icons/GitHub';
 import { Divider } from "@nextui-org/divider";
 
 export default function Footer() {
@@ -9,74 +7,72 @@ export default function Footer() {
       <Divider className="my-4" />
       <div className="mx-auto max-w-[1920px] px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
-          {/* Logo 部分 */}
+          {/* Logo Section */}
           <div className="col-span-2">
             <Link
               href="/"
               className="flex items-center gap-2"
             >
-              <Logo />
               <p className="font-bold text-inherit">ShortNovel</p>
             </Link>
             <p className="mt-4 text-small text-default-500">
-              发现精彩短篇小说，开启阅读新世界。
+              Discover amazing short stories and start your reading journey.
             </p>
           </div>
 
-          {/* 产品部分 */}
+          {/* Product Section */}
           <div className="flex flex-col gap-2">
-            <p className="font-medium text-default-700">产品</p>
+            <p className="font-medium text-default-700">Product</p>
             <Link href="/#" color="foreground" size="sm">
-              首页
+              Home
             </Link>
             <Link href="/#" color="foreground" size="sm">
-              定价
+              Pricing
             </Link>
             <Link href="/#" color="foreground" size="sm">
-              关于
+              About
             </Link>
           </div>
 
-          {/* 资源部分 */}
+          {/* Resources Section */}
           <div className="flex flex-col gap-2">
-            <p className="font-medium text-default-700">资源</p>
+            <p className="font-medium text-default-700">Resources</p>
             <Link href="/#" color="foreground" size="sm">
-              博客
+              Blog
             </Link>
             <Link href="/#" color="foreground" size="sm">
-              帮助中心
+              Help Center
             </Link>
             <Link href="/#" color="foreground" size="sm">
-              联系我们
+              Contact Us
             </Link>
           </div>
 
-          {/* 法律部分 */}
+          {/* Legal Section */}
           <div className="flex flex-col gap-2">
-            <p className="font-medium text-default-700">法律</p>
+            <p className="font-medium text-default-700">Legal</p>
             <Link href="/#" color="foreground" size="sm">
-              隐私政策
+              Privacy Policy
             </Link>
             <Link href="/#" color="foreground" size="sm">
-              使用条款
+              Terms of Service
             </Link>
           </div>
 
-          {/* 社交媒体部分 */}
+          {/* Social Media Section */}
           <div className="flex flex-col gap-2">
-            <p className="font-medium text-default-700">社交媒体</p>
+            <p className="font-medium text-default-700">Social Media</p>
             <div className="flex gap-4">
-              
-              {/* 可以添加更多社交媒体图标 */}
+              {/* Add more social media icons here */}
             </div>
           </div>
         </div>
 
-        {/* 底部版权信息 */}
+        {/* Copyright Section */}
         <Divider className="my-8" />
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-small text-default-500">
-            &copy; {new Date().getFullYear()} ShortNovel. All rights reserved.
+            &copy; {new Date().getFullYear()} NovelShort. All rights reserved.
           </p>
         </div>
       </div>

@@ -25,18 +25,18 @@ export default function Navlinks({ user, isMobile = false }: NavlinksProps) {
     <div className={isMobile ? "" : "flex gap-4 items-center"}>
       <NavItem isActive={pathname === "/"}>
         <Link href="/" {...linkStyles}>
-          首页
+          Home
         </Link>
       </NavItem>
       <NavItem isActive={pathname === "/pricing"}>
         <Link href="/pricing" {...linkStyles}>
-          定价
+        pricing
         </Link>
       </NavItem>
       {user && (
         <NavItem isActive={pathname === "/account"}>
           <Link href="/account" {...linkStyles}>
-            账户
+          account
           </Link>
         </NavItem>
       )}
