@@ -1,51 +1,45 @@
 'use client';
 
-import Link from 'next/link';
-import { SignOut } from '@/utils/auth-helpers/server';
-import { handleRequest } from '@/utils/auth-helpers/client';
-import Logo from '@/components/icons/Logo';
-import { usePathname, useRouter } from 'next/navigation';
-import { getRedirectMethod } from '@/utils/auth-helpers/settings';
-import s from './Navbar.module.css';
+import { usePathname } from 'next/navigation';
+import { NavbarItem, NavbarMenuItem } from "@nextui-org/navbar";
+import { Link } from "@nextui-org/link";
 
 interface NavlinksProps {
   user?: any;
+  isMobile?: boolean;
 }
 
-export default function Navlinks({ user }: NavlinksProps) {
-  const router = getRedirectMethod() === 'client' ? useRouter() : null;
+export default function Navlinks({ user, isMobile = false }: NavlinksProps) {
+  const pathname = usePathname();
+  const NavItem = isMobile ? NavbarMenuItem : NavbarItem;
+  
+  const linkStyles = isMobile ? {
+    className: "w-full",
+    size: "md" as const
+  } : {
+    color: "foreground" as const,
+    className: "text-sm"
+  };
 
   return (
-    <div className="relative flex flex-row justify-between py-4 align-center md:py-6">
-      <div className="flex items-center flex-1">
-        <Link href="/" className={s.logo} aria-label="Logo">
-          <Logo />
+    <div className={isMobile ? "" : "flex gap-4 items-center"}>
+      <NavItem isActive={pathname === "/"}>
+        <Link href="/" {...linkStyles}>
+          首页
         </Link>
-        <nav className="ml-6 space-x-2 lg:block">
-          <Link href="/" className={s.link}>
-            Pricing
+      </NavItem>
+      <NavItem isActive={pathname === "/pricing"}>
+        <Link href="/pricing" {...linkStyles}>
+          定价
+        </Link>
+      </NavItem>
+      {user && (
+        <NavItem isActive={pathname === "/account"}>
+          <Link href="/account" {...linkStyles}>
+            账户
           </Link>
-          {user && (
-            <Link href="/account" className={s.link}>
-              Account
-            </Link>
-          )}
-        </nav>
-      </div>
-      <div className="flex justify-end space-x-8">
-        {user ? (
-          <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
-            <input type="hidden" name="pathName" value={usePathname()} />
-            <button type="submit" className={s.link}>
-              Sign out
-            </button>
-          </form>
-        ) : (
-          <Link href="/signin" className={s.link}>
-            Sign In
-          </Link>
-        )}
-      </div>
+        </NavItem>
+      )}
     </div>
   );
 }

@@ -1,12 +1,14 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
+const { nextui } = require("@nextui-org/react");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class', '[data-theme="dark"]'],
+  darkMode: ['class'],
   content: [
     'app/**/*.{ts,tsx}',
     'components/**/*.{ts,tsx}',
-    'pages/**/*.{ts,tsx}'
+    'pages/**/*.{ts,tsx}',
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     container: {
@@ -17,6 +19,41 @@ module.exports = {
       }
     },
     extend: {
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans]
       },
@@ -36,5 +73,24 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [
+    require("tailwindcss-animate"),
+    nextui({
+      prefix: "nextui", // prefix for themes
+      addCommonColors: false, // override common colors (e.g. "blue", "green", "red")
+      defaultTheme: "light", // default theme from the themes object
+      defaultExtendTheme: "light", // default theme to extend on custom themes
+      layout: {}, // common layout tokens (applied to all themes)
+      themes: {
+        light: {
+          layout: {}, // light theme layout tokens
+          colors: {} // light theme colors
+        },
+        dark: {
+          layout: {}, // dark theme layout tokens
+          colors: {} // dark theme colors
+        }
+      }
+    })
+  ]
 };

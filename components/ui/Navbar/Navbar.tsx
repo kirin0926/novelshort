@@ -1,22 +1,46 @@
 import { createClient } from '@/utils/supabase/server';
-import s from './Navbar.module.css';
 import Navlinks from './Navlinks';
+import { 
+  Navbar as NextUINavbar, 
+  NavbarBrand, 
+  NavbarContent,
+  NavbarMenuToggle,
+  NavbarMenu,
+} from "@nextui-org/navbar";
+import { Link } from "@nextui-org/link";
+import Logo from '@/components/icons/Logo';
+import UserDropdown from './UserDropdown';
 
+// 主 Navbar 组件
 export default async function Navbar() {
   const supabase = createClient();
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
   return (
-    <nav className={s.root}>
-      <a href="#skip" className="sr-only focus:not-sr-only">
-        Skip to content
-      </a>
-      <div className="max-w-6xl px-6 mx-auto">
-        <Navlinks user={user} />
-      </div>
-    </nav>
+    <NextUINavbar 
+      maxWidth="xl" 
+      position="sticky"
+      className="border-b border-divider/60 backdrop-blur-lg backdrop-saturate-150 bg-background/70"
+    >
+      <NavbarContent className="gap-4">
+        <NavbarMenuToggle className="sm:hidden" />
+        <NavbarBrand>
+          <Link href="/" color="foreground">
+            <Logo />
+          </Link>
+        </NavbarBrand>
+        <div className="hidden sm:flex">
+          <Navlinks user={user} />
+        </div>
+      </NavbarContent>
+
+      <NavbarContent justify="end">
+        <UserDropdown user={user} />
+      </NavbarContent>
+
+      <NavbarMenu>
+        <Navlinks user={user} isMobile />
+      </NavbarMenu>
+    </NextUINavbar>
   );
 }

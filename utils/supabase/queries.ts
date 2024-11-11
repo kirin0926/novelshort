@@ -1,6 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { cache } from 'react';
 
+// 获取用户信息（使用 React cache）
 export const getUser = cache(async (supabase: SupabaseClient) => {
   const {
     data: { user }
@@ -8,6 +9,7 @@ export const getUser = cache(async (supabase: SupabaseClient) => {
   return user;
 });
 
+// 获取订阅信息（使用 React cache）
 export const getSubscription = cache(async (supabase: SupabaseClient) => {
   const { data: subscription, error } = await supabase
     .from('subscriptions')
@@ -18,6 +20,7 @@ export const getSubscription = cache(async (supabase: SupabaseClient) => {
   return subscription;
 });
 
+// 获取产品列表（使用 React cache）
 export const getProducts = cache(async (supabase: SupabaseClient) => {
   const { data: products, error } = await supabase
     .from('products')
@@ -30,6 +33,7 @@ export const getProducts = cache(async (supabase: SupabaseClient) => {
   return products;
 });
 
+// 获取用户详细信息（使用 React cache）
 export const getUserDetails = cache(async (supabase: SupabaseClient) => {
   const { data: userDetails } = await supabase
     .from('users')

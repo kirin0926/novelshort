@@ -186,3 +186,66 @@ npm run stripe:listen
 5. 代码规范说明
 
 通过这个文档，新加入的开发者可以快速了解项目结构和开发流程。需要注意的是，这个项目主要围绕订阅系统展开，集成了 Stripe 支付和 Supabase 后端服务，是一个全栈应用项目。
+
+___
+
+
+
+## 目录说明
+
+### `/app` 目录
+- Next.js 13+ 的应用主目录
+- 包含所有页面路由和 API 路由
+- 使用 App Router 新特性
+
+### `/components` 目录
+- 存放可复用的 React 组件
+- `/ui`: 基础 UI 组件（按钮、输入框等）
+- `/layout`: 布局相关组件（导航栏、页脚等）
+
+### `/lib` 目录
+- 存放工具函数和共享逻辑
+- `/supabase`: Supabase 客户端配置和辅助函数
+- `/stripe`: Stripe 支付相关的工具函数
+
+### `/supabase` 目录
+- Supabase 项目配置
+- 数据库迁移文件
+- 数据库种子数据
+
+### `/public` 目录
+- 静态资源文件
+- 图片、字体等公共资源
+
+### `/styles` 目录
+- 全局样式定义
+- Tailwind CSS 自定义样式
+
+### `/types` 目录
+- TypeScript 类型定义文件
+- 包含数据库类型定义
+
+## 关键配置文件
+
+- `package.json`: 项目依赖和脚本命令
+- `tailwind.config.js`: Tailwind CSS 配置
+- `tsconfig.json`: TypeScript 配置
+- `.env.local`: 环境变量配置
+
+## 开发建议
+
+1. 新组件开发：
+   - UI 组件放在 `/components/ui`
+   - 业务组件放在对应功能目录
+
+2. API 开发：
+   - API 路由放在 `/app/api`
+   - Webhook 处理放在 `/app/api/webhooks`
+
+3. 数据库操作：
+   - 数据库更改通过 Supabase 迁移管理
+   - 使用 `npm run supabase:generate-migration` 生成迁移文件
+
+4. 样式开发：
+   - 优先使用 Tailwind CSS 类名
+   - 全局样式定义在 `/styles` 目录
