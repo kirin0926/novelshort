@@ -33,7 +33,7 @@ export default function EmailForm({
       description="Please enter the email address you want to use to login."
       footer={
         <div className="flex flex-col items-start justify-between sm:flex-row sm:items-center">
-          <p className="pb-4 sm:pb-0">
+          <p className="pb-4 sm:pb-0 text-black">
             We will email you to verify the change.
           </p>
           <Button
@@ -47,7 +47,7 @@ export default function EmailForm({
         </div>
       }
     >
-      <div className="mt-8 mb-4 text-xl font-semibold">
+      <div className="mt-8 mb-4 text-xl font-semibold text-black">
         <form id="emailForm" onSubmit={(e) => handleSubmit(e)}>
           <input
             type="text"

@@ -1,36 +1,16 @@
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import { HeartIcon } from "@/components/icons/HeartIcon";
+import { getNovelDetail } from "@/utils/supabase/queries";
+import { createClient } from '@/utils/supabase/server';
 
-// 模拟的小说详情数据
-const getNovelDetail = (id: string) => ({
-  id,
-  cover: "https://picsum.photos/400/600",
-  title: "星辰大海",
-  author: "张三",
-  description: "一个关于探索宇宙奥秘的故事，主人公在浩瀚的星空中寻找生命的意义。这是一个充满想象力和哲理的故事，带领读者探索未知的宇宙边界...",
-  likes: 1234,
-  content: `
-    第一章 启程
+export default async function NovelPage({ params }: { params: { id: string } }) {
+  const supabase = createClient();
+  const novel = await getNovelDetail(supabase, params.id);
 
-    星空下，一艘银白色的飞船静静地停泊在太空港。这是"希望号"，一艘最新型的深空探索飞船，它将带领我们进行一次前所未有的星际之旅。
-
-    李明站在观察甲板上，透过巨大的观察窗凝视着远方的星空。作为这次探索任务的首席科学家，他心中既激动又忐忑。三十年的准备，无数个日日夜夜的研究，终于要在今天展开新的篇章。
-
-    "准备启程了，李教授。"副船长王华的声音从身后传来。
-
-    李明深吸一口气，转身面对着自己的团队。二十名精英科学家，都是各自领域最顶尖的专家。他们的眼中闪烁着同样的光芒——对未知的渴望，对发现的期待。
-
-    "是的，让我们开始吧。"李明微笑着说。
-
-    飞船的引擎开始发出轻微的嗡鸣，这是超空间引擎预热的声音。通过多年的研究，人类终于突破了光速的限制，而"希望号"正是搭载着这项革命性技术的第一艘飞船。
-
-    [正文继续...]
-  `
-});
-
-export default function NovelPage({ params }: { params: { id: string } }) {
-  const novel = getNovelDetail(params.id);
+  if (!novel) {
+    return <div>小说不存在或已被删除</div>;
+  }
 
   return (
     <div className="min-h-screen pb-20 bg-white">
@@ -92,9 +72,9 @@ export default function NovelPage({ params }: { params: { id: string } }) {
 
       {/* 正文内容区域 */}
       <div className="container mx-auto px-4 mt-8">
-        <div className="max-w-3xl mx-auto bg-white rounded-lg p-6">
+        <div className="max-w-3xl mx-auto bg-white rounded-lg">
           <div className="prose prose-lg prose-slate mx-auto">
-            {novel.content.split('\n').map((paragraph, index) => (
+            {novel.content.split('\n').map((paragraph: string, index: number) => (
               <p key={index} className="my-4 leading-relaxed">
                 {paragraph.trim()}
               </p>

@@ -20,7 +20,7 @@ interface UserDropdownProps {
 }
 
 export default function UserDropdown({ user }: UserDropdownProps) {
-  const router = getRedirectMethod() === 'client' ? useRouter() : null;
+  const router = useRouter();
   const pathname = usePathname();
 
   if (!user) {
@@ -42,6 +42,10 @@ export default function UserDropdown({ user }: UserDropdownProps) {
     handleRequest(e, SignOut, router);
   };
 
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
@@ -56,16 +60,22 @@ export default function UserDropdown({ user }: UserDropdownProps) {
           description={user.email}
           name={user.user_metadata?.full_name || user.email?.split('@')[0]}
           classNames={{
-            description: "hidden sm:block", // 在移动端隐藏邮箱
-            name: "hidden sm:block", // 在移动端隐藏用户名
+            description: "hidden sm:block",
+            name: "hidden sm:block",
           }}
         />
       </DropdownTrigger>
       <DropdownMenu aria-label="用户菜单">
-        <DropdownItem key="profile" href="/account">
+        {/* <DropdownItem 
+          key="profile" 
+          onPress={() => handleNavigation('/account')}
+        >
           账户设置
-        </DropdownItem>
-        <DropdownItem key="settings" href="/pricing">
+        </DropdownItem> */}
+        <DropdownItem 
+          key="settings" 
+          onPress={() => handleNavigation('/pricing')}
+        >
           订阅管理
         </DropdownItem>
         <DropdownItem 

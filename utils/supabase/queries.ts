@@ -47,3 +47,9 @@ export const getNovels = cache(async (supabase: SupabaseClient) => {
   const { data: novels } = await supabase.from('novels').select('*');
   return novels;
 });
+
+// 获取小说详情
+export const getNovelDetail = cache(async (supabase: SupabaseClient, id: string) => {
+  const { data: novel } = await supabase.from('novels').select('*').eq('id', id).single();
+  return novel;
+});
