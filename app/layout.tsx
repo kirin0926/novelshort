@@ -5,6 +5,8 @@ import { ReactNode } from 'react';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 import { ClientProviders } from './client-providers';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
+import GoogleAdsense from '@/components/GoogleAdsense';
 
 const title = 'shortnovel';
 const description = 'Discover the World of NoverShort Stories';
@@ -26,10 +28,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7897104007345492"
-     crossorigin="anonymous"></script> 
       <head />
       <body>
+        <GoogleAnalytics />
+        <GoogleAdsense />
         <ClientProviders>
           <Navbar />
           {children}
