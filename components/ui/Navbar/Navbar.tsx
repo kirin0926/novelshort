@@ -20,7 +20,7 @@ export default async function Navbar() {
     <NextUINavbar 
       maxWidth="xl" 
       position="sticky"
-      className="border-b border-divider/60 backdrop-blur-lg backdrop-saturate-150 bg-background/70"
+      className="border-b backdrop-blur-lg backdrop-saturate-150 bg-background/70"
     >
       <NavbarContent className="gap-4">
         <NavbarMenuToggle className="sm:hidden" />

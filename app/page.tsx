@@ -1,51 +1,21 @@
 import NovelCard from "@/components/ui/NovelCard/NovelCard";
+import { getNovels } from "@/utils/supabase/queries";
+import { createClient } from '@/utils/supabase/server';
 
-// 模拟的小说数据
-const novels = [
-  {
-    id: "1",
-    cover: "https://picsum.photos/400/600", // 示例图片
-    title: "星辰大海",
-    author: "张三",
-    description: "一个关于探索宇宙奥秘的故事，主人公在浩瀚的星空中寻找生命的意义...",
-    likes: 1234
-  },
-  {
-    id: "2",
-    cover: "https://picsum.photos/400/601",
-    title: "都市之巅",
-    author: "李四",
-    description: "都市生活中的起起落落，商场征战的故事，展现了现代人的生存状态...",
-    likes: 856
-  },
-  {
-    id: "3",
-    cover: "https://picsum.photos/400/602",
-    title: "都市之巅",
-    author: "李四",
-    description: "都市生活中的起起落落，商场征战的故事，展现了现代人的生存状态...",
-    likes: 856
-  },
-  {
-    id: "4",
-    cover: "https://picsum.photos/400/603",
-    title: "都市之巅",
-    author: "李四",
-    description: "都市生活中的起起落落，商场征战的故事，展现了现代人的生存状态...",
-    likes: 856
-  },
-  {
-    id: "5",
-    cover: "https://picsum.photos/400/604",
-    title: "都市之巅",
-    author: "李四",
-    description: "都市生活中的起起落落，商场征战的故事，展现了现代人的生存状态...",
-    likes: 856
-  },
-  // 更多小说数据...
-];
+// 定义小说数据类型
+interface Novel {
+  id: string;
+  cover: string;
+  title: string;
+  author: string;
+  description: string;
+  likes: number;
+}
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = createClient();
+  const novels: Novel[] = await getNovels(supabase) || [];
+
   return (
     <div className="flex flex-col min-h-screen py-2">
       <header className="w-full px-4 sm:px-6 py-8">
