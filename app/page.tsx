@@ -20,7 +20,7 @@ export default async function HomePage() {
     <div className="flex flex-col min-h-screen py-2">
       <header className="w-full px-4 sm:px-6 py-8">
         <h1 className="text-4xl font-bold text-center mb-4">
-          探索精彩小说
+          Novelshorts 探索精彩小说
         </h1>
         <p className="text-xl text-center text-default-600 mb-8">
           发现你最爱的故事
