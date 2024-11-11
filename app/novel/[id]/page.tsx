@@ -15,7 +15,7 @@ export default async function NovelPage({ params }: { params: { id: string } }) 
   return (
     <div className="min-h-screen pb-20 bg-white">
       {/* 顶部信息区域 */}
-      <div className="w-full bg-white py-12">
+      <div className="w-full bg-white py-12 hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
