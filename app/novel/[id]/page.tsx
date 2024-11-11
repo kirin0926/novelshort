@@ -37,13 +37,6 @@ export default async function NovelPage({ params }: { params: { id: string } }) 
               {/* 信息区 */}
               <div className="flex-1 text-center md:text-left space-y-4">
                 <h1 className="text-3xl md:text-4xl font-bold">{novel.title}</h1>
-                <div className="flex items-center gap-4 justify-center md:justify-start">
-                  <p className="text-xl text-default-600">作者：{novel.author}</p>
-                  <div className="flex items-center gap-2">
-                    <HeartIcon className="text-danger" />
-                    <span className="text-default-600">{novel.likes}</span>
-                  </div>
-                </div>
                 <p className="text-lg text-default-600 leading-relaxed max-w-2xl">
                   {novel.description}
                 </p>
@@ -73,6 +66,11 @@ export default async function NovelPage({ params }: { params: { id: string } }) 
       {/* 正文内容区域 */}
       <div className="container mx-auto px-4 mt-8">
         <div className="max-w-3xl mx-auto bg-white rounded-lg">
+          {/* 添加标题区域 */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold mb-2">{novel.title}</h1>
+          </div>
+
           <div className="prose prose-lg prose-slate mx-auto">
             {novel.content.split('\n').map((paragraph: string, index: number) => (
               <p key={index} className="my-4 leading-relaxed">
