@@ -3,26 +3,30 @@ import type { Tables } from '@/types_db';
 type Price = Tables<'prices'>;
 
 export const getURL = (path: string = '') => {
-  // Check if NEXT_PUBLIC_SITE_URL is set and non-empty. Set this to your site URL in production env.
+  // 检查 NEXT_PUBLIC_SITE_URL 环境变量是否已设置且非空
+  // 在生产环境中，应该设置这个变量为你的网站 URL
   let url =
     process?.env?.NEXT_PUBLIC_SITE_URL &&
     process.env.NEXT_PUBLIC_SITE_URL.trim() !== ''
       ? process.env.NEXT_PUBLIC_SITE_URL
-      : // If not set, check for NEXT_PUBLIC_VERCEL_URL, which is automatically set by Vercel.
+      : // 如果未设置，检查 NEXT_PUBLIC_VERCEL_URL
+        // 这个变量是由 Vercel 自动设置的
         process?.env?.NEXT_PUBLIC_VERCEL_URL &&
           process.env.NEXT_PUBLIC_VERCEL_URL.trim() !== ''
         ? process.env.NEXT_PUBLIC_VERCEL_URL
-        : // If neither is set, default to localhost for local development.
+        : // 如果两个环境变量都未设置，默认使用 localhost
+          // 用于本地开发环境
           'http://localhost:3000/';
 
-  // Trim the URL and remove trailing slash if exists.
+  // 清理 URL：移除末尾的斜杠
   url = url.replace(/\/+$/, '');
-  // Make sure to include `https://` when not localhost.
+  // 确保非 localhost 的 URL 包含 'https://' 协议
   url = url.includes('http') ? url : `https://${url}`;
-  // Ensure path starts without a slash to avoid double slashes in the final URL.
+  // 确保路径不以斜杠开头，避免最终 URL 中出现双斜杠
   path = path.replace(/^\/+/, '');
 
-  // Concatenate the URL and the path.
+  // 拼接 URL 和路径
+  // 如果有路径，返回完整 URL；如果没有路径，只返回基础 URL
   return path ? `${url}/${path}` : url;
 };
 
