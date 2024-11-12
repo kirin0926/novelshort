@@ -26,6 +26,9 @@ export default async function HomePage() {
         <p className="text-xl text-center text-default-600 mb-8">
         Discover your favorite story, Enjoy Quality Reading Anytime, Anywhere
         </p>
+        <p className="text-sm text-center text-default-600 mb-8">
+        {getURL()}
+        </p>
       </header>
 
       <main className="flex-1 container mx-auto px-4 sm:px-6">
