@@ -1,7 +1,6 @@
 import NovelCard from "@/components/ui/NovelCard/NovelCard";
 import { getNovels } from "@/utils/supabase/queries";
 import { createClient } from '@/utils/supabase/server';
-import { getURL } from '@/utils/helpers';
 
 // 定义小说数据类型
 interface Novel {
@@ -16,7 +15,6 @@ interface Novel {
 export default async function HomePage() {
   const supabase = createClient();
   const novels: Novel[] = await getNovels(supabase) || [];
-  console.log(getURL());
   return (
     <div className="flex flex-col min-h-screen py-2">
       <header className="w-full px-4 sm:px-6 py-8">
@@ -25,9 +23,6 @@ export default async function HomePage() {
         </h1>
         <p className="text-xl text-center text-default-600 mb-8">
         Discover your favorite story, Enjoy Quality Reading Anytime, Anywhere
-        </p>
-        <p className="text-sm text-center text-default-600 mb-8">
-        {getURL()}
         </p>
       </header>
 
