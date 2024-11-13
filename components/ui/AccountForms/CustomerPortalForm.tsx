@@ -1,5 +1,6 @@
 'use client';
 
+// 导入必要的组件和hooks
 import Button from '@/components/ui/Button';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -8,10 +9,12 @@ import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import { Tables } from '@/types_db';
 
+// 定义类型
 type Subscription = Tables<'subscriptions'>;
 type Price = Tables<'prices'>;
 type Product = Tables<'products'>;
 
+// 定义订阅类型，包含价格和产品信息
 type SubscriptionWithPriceAndProduct = Subscription & {
   prices:
     | (Price & {
@@ -20,15 +23,18 @@ type SubscriptionWithPriceAndProduct = Subscription & {
     | null;
 };
 
+// 组件属性接口
 interface Props {
   subscription: SubscriptionWithPriceAndProduct | null;
 }
 
 export default function CustomerPortalForm({ subscription }: Props) {
+  // 初始化路由和状态
   const router = useRouter();
   const currentPath = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // 格式化订阅价格，转换为美元显示
   const subscriptionPrice =
     subscription &&
     new Intl.NumberFormat('en-US', {
@@ -37,6 +43,7 @@ export default function CustomerPortalForm({ subscription }: Props) {
       minimumFractionDigits: 0
     }).format((subscription?.prices?.unit_amount || 0) / 100);
 
+  // 处理 Stripe 客户门户请求
   const handleStripePortalRequest = async () => {
     setIsSubmitting(true);
     const redirectUrl = await createStripePortal(currentPath);
@@ -44,6 +51,7 @@ export default function CustomerPortalForm({ subscription }: Props) {
     return router.push(redirectUrl);
   };
 
+  // 渲染订阅信息卡片
   return (
     <Card
       title="Your Plan"
@@ -65,6 +73,7 @@ export default function CustomerPortalForm({ subscription }: Props) {
         </div>
       }
     >
+      {/* 显示订阅价格或选择计划链接 */}
       <div className="mt-8 mb-4 text-xl font-semibold">
         {subscription ? (
           `${subscriptionPrice}/${subscription?.prices?.interval}`

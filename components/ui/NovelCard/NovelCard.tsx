@@ -43,7 +43,7 @@ export default function NovelCard({
       </CardHeader>
       <CardBody className="px-2 py-1 sm:px-3 sm:py-2">
         <h4 className="font-bold text-small sm:text-large line-clamp-1">{title}</h4>
-        <p className="text-tiny sm:text-small text-default-500">作者：{author}</p>
+        <p className="text-tiny sm:text-small text-default-500">Author：{author}</p>
         <p className="text-tiny sm:text-small line-clamp-2 mt-1 sm:mt-2 text-default-600">
           {description}
         </p>
